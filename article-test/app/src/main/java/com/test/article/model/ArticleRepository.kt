@@ -7,23 +7,44 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ArticleRepository {
-    private val mutableLiveData = MutableLiveData<List<ArticleResponse>>()
-    fun getMutableLiveData(): MutableLiveData<List<ArticleResponse>> {
+
+    fun getArticleListLiveData(): MutableLiveData<List<ArticleResponse>> {
+        val articleLiveData = MutableLiveData<List<ArticleResponse>>()
         getService()
             .article()
-            .enqueue(object : Callback<List<ArticleResponse>?> {
+            .enqueue(object : Callback<List<ArticleResponse>> {
                 override fun onResponse(
-                    call: Call<List<ArticleResponse>?>,
-                    response: Response<List<ArticleResponse>?>
+                    call: Call<List<ArticleResponse>>,
+                    response: Response<List<ArticleResponse>>
                 ) {
                     val articles = response.body()
                     if (articles != null) {
-                        mutableLiveData.value = articles
+                        articleLiveData.value = articles
                     }
                 }
 
-                override fun onFailure(call: Call<List<ArticleResponse>?>, t: Throwable) {}
+                override fun onFailure(call: Call<List<ArticleResponse>>, t: Throwable) {}
             })
-        return mutableLiveData
+        return articleLiveData
+    }
+
+    fun getArticleDetailLiveData(id: Int): MutableLiveData<ArticleDetailResponse> {
+        val articleDetailLiveData = MutableLiveData<ArticleDetailResponse>()
+        getService()
+            .articleDetail(id)
+            .enqueue(object : Callback<ArticleDetailResponse> {
+                override fun onResponse(
+                    call: Call<ArticleDetailResponse>,
+                    response: Response<ArticleDetailResponse>
+                ) {
+                    val articles = response.body()
+                    if (articles != null) {
+                        articleDetailLiveData.value = articles
+                    }
+                }
+
+                override fun onFailure(call: Call<ArticleDetailResponse>, t: Throwable) {}
+            })
+        return articleDetailLiveData
     }
 }

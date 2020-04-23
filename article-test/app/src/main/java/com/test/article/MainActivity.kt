@@ -12,7 +12,7 @@ import com.test.article.model.ArticleResponse
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var mainViewModel: MainViewModel
+    private lateinit var articleViewModel: ArticleViewModel
     private lateinit var articleAdapter: ArticleAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,8 +31,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setData() {
-        mainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-        mainViewModel.articles.observe(
+        articleViewModel = ViewModelProviders.of(this).get(ArticleViewModel::class.java)
+        articleViewModel.articles.observe(
             this,
             Observer { articleViewModels: List<ArticleResponse> ->
                 articleAdapter.setArticles(articleViewModels)
