@@ -11,16 +11,25 @@ import java.util.*
 
 class ArticleAdapter : RecyclerView.Adapter<ArticleViewHolder>() {
     private var articles: List<ArticleResponse> = ArrayList()
+    var itemClick: ItemClick? = null
+        set(value) {
+            field = value
+        }
+
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ArticleViewHolder {
         val articleItemBinding: ArticleItemBinding = DataBindingUtil.inflate(
             LayoutInflater.from(viewGroup.context),
-            R.layout.article_item, viewGroup, false
-        )
+            R.layout.article_item, viewGroup, false)
+
+
         return ArticleViewHolder(articleItemBinding)
     }
 
     override fun onBindViewHolder(articleViewHolder: ArticleViewHolder, i: Int) {
         articleViewHolder.articleItemBinding.articleViewModel = articles[i]
+        articleViewHolder.itemView.setOnClickListener {
+            itemClick?.click(articles[i].id)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -30,5 +39,9 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleViewHolder>() {
     fun setArticles(articleViewModels: List<ArticleResponse>) {
         articles = articleViewModels
         notifyDataSetChanged()
+    }
+
+    interface ItemClick{
+        fun click(id: Int)
     }
 }

@@ -1,5 +1,6 @@
 package com.test.article
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -10,7 +11,7 @@ import com.test.article.adapter.ArticleAdapter
 import com.test.article.databinding.ActivityMainBinding
 import com.test.article.model.ArticleResponse
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ArticleAdapter.ItemClick {
 
     private lateinit var articleViewModel: ArticleViewModel
     private lateinit var articleAdapter: ArticleAdapter
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         articleAdapter = ArticleAdapter()
         recyclerView.adapter = articleAdapter
+        articleAdapter.itemClick = this
     }
 
     private fun setData() {
@@ -37,5 +39,11 @@ class MainActivity : AppCompatActivity() {
             Observer { articleViewModels: List<ArticleResponse> ->
                 articleAdapter.setArticles(articleViewModels)
             })
+    }
+
+    override fun click(id: Int) {
+        val intent = Intent(this, DetailActivity::class.java)
+        intent.putExtra("id", id)
+        startActivity(intent)
     }
 }
