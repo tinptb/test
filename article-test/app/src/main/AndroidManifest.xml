@@ -19,6 +19,7 @@
         </activity>
 
         <activity android:name=".DetailActivity" android:label="Detail"/>
+        <activity android:name=".EditActivity" />
     </application>
 
 </manifest>

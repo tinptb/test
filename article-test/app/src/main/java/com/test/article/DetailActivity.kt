@@ -1,5 +1,6 @@
 package com.test.article
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -10,12 +11,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.test.article.databinding.ActivityDetailBinding
 import com.test.article.model.ArticleDetailResponse
+import kotlinx.android.synthetic.main.activity_detail.*
+import kotlinx.android.synthetic.main.activity_edit.*
 
 class DetailActivity : AppCompatActivity() {
 
     companion object {
         const val ID = "id"
         const val TITLE = "title"
+        const val DETAIL = "detail"
         const val AVATAR = "avatar"
     }
 
@@ -34,13 +38,18 @@ class DetailActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu, menu);
+        menuInflater.inflate(R.menu.menu_edit, menu);
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId == R.id.edit){
-            Toast.makeText(this, "edit", Toast.LENGTH_LONG).show()
+            val intent = Intent(this, EditActivity::class.java)
+            intent.putExtra(TITLE, title)
+            intent.putExtra(DETAIL, tvText.text)
+            startActivity(intent)
+        }else{
+            onBackPressed()
         }
         return true
     }
