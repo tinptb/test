@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    >
 
     <data>
 
         <variable
             name="articleDetailViewModel"
             type="com.test.article.model.ArticleDetailResponse" />
+
+        <variable
+            name="avatar"
+            type="String" />
 
     </data>
 
@@ -35,6 +40,16 @@
                 android:text="@{articleDetailViewModel.text}"
                 android:textSize="18sp"
                 tools:text="Text" />
+
+            <ImageView
+                android:id="@+id/imAvatar"
+                android:scaleType="fitXY"
+                bind:avatar="@{avatar}"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:padding="10dp"
+                android:layout_gravity="end"
+                tools:src="@drawable/ic_launcher_background" />
 
         </androidx.cardview.widget.CardView>
     </LinearLayout>

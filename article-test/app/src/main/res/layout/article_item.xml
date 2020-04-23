@@ -64,14 +64,14 @@
 
                     </LinearLayout>
                   <ImageView
-                      android:id="@+id/imAvatar"
-                      android:scaleType="fitXY"
-                      bind:avatar="@{articleViewModel.avatar}"
-                      android:layout_width="100dp"
-                      android:layout_height="100dp"
-                      android:padding="10dp"
-                      android:layout_gravity="end"
-                      tools:src="@drawable/ic_launcher_background" />
+                    android:id="@+id/imAvatar"
+                    android:scaleType="fitXY"
+                    bind:avatar="@{articleViewModel.avatar}"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:padding="10dp"
+                    android:layout_gravity="end"
+                    tools:src="@drawable/ic_launcher_background" />
                 </LinearLayout>
 
 

@@ -37,9 +37,9 @@ class ArticleRepository {
                     call: Call<ArticleDetailResponse>,
                     response: Response<ArticleDetailResponse>
                 ) {
-                    val articles = response.body()
-                    if (articles != null) {
-                        articleDetailLiveData.value = articles
+                    val articleDetail = response.body()
+                    if (articleDetail != null) {
+                        articleDetailLiveData.value = articleDetail
                     }
                 }
 

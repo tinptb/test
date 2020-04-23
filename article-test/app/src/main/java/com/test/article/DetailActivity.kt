@@ -10,6 +10,11 @@ import com.test.article.model.ArticleDetailResponse
 
 class DetailActivity : AppCompatActivity() {
 
+    companion object {
+        const val ID = "id"
+        const val AVATAR = "avatar"
+    }
+
     private lateinit var articleDetailViewModel: ArticleDetailViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,13 +27,19 @@ class DetailActivity : AppCompatActivity() {
             DataBindingUtil.setContentView<ActivityDetailBinding>(this, R.layout.activity_detail)
         articleDetailViewModel = ViewModelProviders.of(
             this,
-            ArticleViewModelFactory(this.application, intent.getIntExtra("id", 0))
+            ArticleViewModelFactory(
+                this.application,
+                intent.getIntExtra(ID, 0)
+            )
         ).get(ArticleDetailViewModel::class.java)
 
         articleDetailViewModel.articleDetail.observe(
             this,
-            Observer { articleDetailViewModels: ArticleDetailResponse ->
-                activityDetailBinding.articleDetailViewModel = articleDetailViewModels
+            Observer { articleDetailResponse: ArticleDetailResponse ->
+                activityDetailBinding.articleDetailViewModel = articleDetailResponse
             })
+
+        activityDetailBinding.avatar = intent.getStringExtra(AVATAR)
+
     }
 }
