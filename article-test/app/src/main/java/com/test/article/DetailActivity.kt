@@ -1,6 +1,9 @@
 package com.test.article
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -12,6 +15,7 @@ class DetailActivity : AppCompatActivity() {
 
     companion object {
         const val ID = "id"
+        const val TITLE = "title"
         const val AVATAR = "avatar"
     }
 
@@ -19,7 +23,26 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = intent.getStringExtra(TITLE)
         setData()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu);
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.edit){
+            Toast.makeText(this, "edit", Toast.LENGTH_LONG).show()
+        }
+        return true
     }
 
     private fun setData() {

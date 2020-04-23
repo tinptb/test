@@ -22,9 +22,10 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleViewHolder>() {
     }
 
     override fun onBindViewHolder(articleViewHolder: ArticleViewHolder, i: Int) {
-        articleViewHolder.articleItemBinding.articleViewModel = articles[i]
+        val currentArticle = articles[i]
+        articleViewHolder.articleItemBinding.articleViewModel = currentArticle
         articleViewHolder.itemView.setOnClickListener {
-            itemClick?.click(articles[i].id, articles[i].avatar)
+            itemClick?.click(currentArticle.id, currentArticle.title, currentArticle.avatar)
         }
     }
 
@@ -38,6 +39,6 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleViewHolder>() {
     }
 
     interface ItemClick {
-        fun click(id: Int, imageUrl: String)
+        fun click(id: Int, title: String, imageUrl: String)
     }
 }

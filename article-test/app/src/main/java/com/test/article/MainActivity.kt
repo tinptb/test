@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.test.article.DetailActivity.Companion.AVATAR
 import com.test.article.DetailActivity.Companion.ID
+import com.test.article.DetailActivity.Companion.TITLE
 import com.test.article.adapter.ArticleAdapter
 import com.test.article.databinding.ActivityMainBinding
 import com.test.article.model.ArticleResponse
@@ -43,10 +44,11 @@ class MainActivity : AppCompatActivity(), ArticleAdapter.ItemClick {
             })
     }
 
-    override fun click(id: Int, imageUrl: String) {
+    override fun click(id: Int, title: String, imageUrl: String) {
         val intent = Intent(this, DetailActivity::class.java)
         intent.putExtra(ID, id)
         intent.putExtra(AVATAR, imageUrl)
+        intent.putExtra(TITLE, title)
         startActivity(intent)
     }
 }
