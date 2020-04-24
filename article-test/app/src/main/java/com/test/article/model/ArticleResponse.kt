@@ -17,9 +17,7 @@ data class ArticleResponse(
     val avatar: String) {
 
     fun convertLongToDate(time: Long): String {
-        val date = Date(time * 1000)
-        val format = SimpleDateFormat("yyyy-MM-dd")
-        return format.format(date)
+        return ArticleResponseFactory.convertLongToDate(time)
     }
 
 }

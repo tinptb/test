@@ -15,6 +15,7 @@ import com.test.article.DetailActivity.Companion.TITLE
 import com.test.article.adapter.ArticleAdapter
 import com.test.article.databinding.ActivityMainBinding
 import com.test.article.model.Article
+import com.test.article.model.ArticleResponseFactory
 
 class MainActivity : AppCompatActivity(), ArticleAdapter.ItemClick {
 
