@@ -2,6 +2,7 @@ package com.test.article
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -22,25 +23,25 @@ class MainActivity : AppCompatActivity(), ArticleAdapter.ItemClick {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setupRecyclerView()
         setData()
     }
 
-    private fun setupRecyclerView() {
+    private fun setData() {
         val activityMainBinding: ActivityMainBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+        activityMainBinding.loadingVisible = View.VISIBLE
         val recyclerView = activityMainBinding.viewArticles
         recyclerView.layoutManager = LinearLayoutManager(this)
         articleAdapter = ArticleAdapter()
         recyclerView.adapter = articleAdapter
         articleAdapter.itemClick = this
-    }
 
-    private fun setData() {
         articleViewModel = ViewModelProviders.of(this).get(ArticleViewModel::class.java)
         articleViewModel.articles.observe(
             this,
             Observer { article: Article ->
+                activityMainBinding.loadingVisible = View.GONE
                 if (article.articleResponse.isNotEmpty()) {
                     articleAdapter.setArticles(article.articleResponse)
                 } else {

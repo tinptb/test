@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -58,6 +59,8 @@ class DetailActivity : AppCompatActivity() {
     private fun setData() {
         val activityDetailBinding =
             DataBindingUtil.setContentView<ActivityDetailBinding>(this, R.layout.activity_detail)
+        activityDetailBinding.loadingVisible = View.VISIBLE
+
         articleDetailViewModel = ViewModelProviders.of(
             this,
             ArticleViewModelFactory(
@@ -69,6 +72,7 @@ class DetailActivity : AppCompatActivity() {
         articleDetailViewModel.articleDetail.observe(
             this,
             Observer { articleDetail: ArticleDetail ->
+                activityDetailBinding.loadingVisible = View.GONE
 
                 if (articleDetail.articleDetailResponse != null) {
                     activityDetailBinding.articleDetailViewModel =
