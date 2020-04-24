@@ -1,4 +1,4 @@
-package com.test.article
+package com.test.article.model.repository
 
 import androidx.lifecycle.MutableLiveData
 import com.test.article.model.Article

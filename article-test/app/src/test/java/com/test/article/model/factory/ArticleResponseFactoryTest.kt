@@ -1,4 +1,4 @@
-package com.test.article.model
+package com.test.article.model.factory
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals

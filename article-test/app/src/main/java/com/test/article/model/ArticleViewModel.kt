@@ -1,7 +1,8 @@
-package com.test.article
+package com.test.article.model
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import com.test.article.model.repository.ArticleRepository
 
 class ArticleViewModel(application: Application) : AndroidViewModel(application) {
     val articles = ArticleRepository().getArticleListLiveData()

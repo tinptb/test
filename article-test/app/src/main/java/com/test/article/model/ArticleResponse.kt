@@ -4,8 +4,7 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import java.text.SimpleDateFormat
-import java.util.*
+import com.test.article.model.factory.ArticleResponseFactory
 
 data class Article(val articleResponse: List<ArticleResponse>, val error: String? = null)
 
@@ -14,7 +13,8 @@ data class ArticleResponse(
     val title: String,
     val last_update: Long,
     val short_description: String,
-    val avatar: String) {
+    val avatar: String
+) {
 
     fun convertLongToDate(time: Long): String {
         return ArticleResponseFactory.convertLongToDate(time)

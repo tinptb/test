@@ -1,4 +1,4 @@
-package com.test.article.model
+package com.test.article.model.factory
 
 import java.text.SimpleDateFormat
 import java.util.*

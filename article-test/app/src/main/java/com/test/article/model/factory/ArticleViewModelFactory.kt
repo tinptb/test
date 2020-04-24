@@ -1,8 +1,9 @@
-package com.test.article
+package com.test.article.model.factory
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.test.article.model.ArticleDetailViewModel
 
 class ArticleViewModelFactory(private val application: Application, private val id: Int) :
     ViewModelProvider.Factory {
