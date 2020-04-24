@@ -24,11 +24,13 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private lateinit var articleDetailViewModel: ArticleDetailViewModel
+    private var title: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = intent.getStringExtra(TITLE)
+        title = intent.getStringExtra(TITLE)
+        supportActionBar?.title = title
         setData()
     }
 

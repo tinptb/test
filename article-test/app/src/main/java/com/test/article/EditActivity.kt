@@ -37,6 +37,10 @@ class EditActivity : AppCompatActivity() {
         val activityEditBinding =
             DataBindingUtil.setContentView<ActivityEditBinding>(this, R.layout.activity_edit)
         activityEditBinding.detail = intent.getStringExtra(DETAIL)
+        activityEditBinding.editActivity = this
+    }
 
+    fun save() {
+        finish()
     }
 }
