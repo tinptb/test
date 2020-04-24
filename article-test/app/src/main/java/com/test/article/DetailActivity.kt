@@ -4,15 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.test.article.databinding.ActivityDetailBinding
-import com.test.article.model.ArticleDetailResponse
+import com.test.article.model.ArticleDetail
 import kotlinx.android.synthetic.main.activity_detail.*
-import kotlinx.android.synthetic.main.activity_edit.*
 
 class DetailActivity : AppCompatActivity() {
 
@@ -45,12 +44,12 @@ class DetailActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == R.id.edit){
+        if (item.itemId == R.id.edit) {
             val intent = Intent(this, EditActivity::class.java)
             intent.putExtra(TITLE, title)
             intent.putExtra(DETAIL, tvText.text)
             startActivity(intent)
-        }else{
+        } else {
             onBackPressed()
         }
         return true
@@ -69,8 +68,19 @@ class DetailActivity : AppCompatActivity() {
 
         articleDetailViewModel.articleDetail.observe(
             this,
-            Observer { articleDetailResponse: ArticleDetailResponse ->
-                activityDetailBinding.articleDetailViewModel = articleDetailResponse
+            Observer { articleDetail: ArticleDetail ->
+
+                if (articleDetail.articleDetailResponse != null) {
+                    activityDetailBinding.articleDetailViewModel =
+                        articleDetail.articleDetailResponse
+                } else {
+                    AlertDialog.Builder(this)
+                        .setTitle("Error")
+                        .setMessage(articleDetail.error)
+                        .setNegativeButton("OK", null)
+                        .show()
+                }
+
             })
 
         activityDetailBinding.avatar = intent.getStringExtra(AVATAR)

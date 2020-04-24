@@ -7,6 +7,8 @@ import com.bumptech.glide.request.RequestOptions
 import java.text.SimpleDateFormat
 import java.util.*
 
+data class Article(val articleResponse: List<ArticleResponse>, val error: String? = null)
+
 data class ArticleResponse(
     val id: Int,
     val title: String,
@@ -19,6 +21,7 @@ data class ArticleResponse(
         val format = SimpleDateFormat("yyyy-MM-dd")
         return format.format(date)
     }
+
 }
 
 

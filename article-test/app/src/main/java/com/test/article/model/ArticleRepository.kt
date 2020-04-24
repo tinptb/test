@@ -8,8 +8,8 @@ import retrofit2.Response
 
 class ArticleRepository {
 
-    fun getArticleListLiveData(): MutableLiveData<List<ArticleResponse>> {
-        val articleLiveData = MutableLiveData<List<ArticleResponse>>()
+    fun getArticleListLiveData(): MutableLiveData<Article> {
+        val articleLiveData = MutableLiveData<Article>()
         getService()
             .article()
             .enqueue(object : Callback<List<ArticleResponse>> {
@@ -19,17 +19,19 @@ class ArticleRepository {
                 ) {
                     val articles = response.body()
                     if (articles != null) {
-                        articleLiveData.value = articles
+                        articleLiveData.value = Article(articles)
                     }
                 }
 
-                override fun onFailure(call: Call<List<ArticleResponse>>, t: Throwable) {}
+                override fun onFailure(call: Call<List<ArticleResponse>>, t: Throwable) {
+                    articleLiveData.value = Article(emptyList(), t.message)
+                }
             })
         return articleLiveData
     }
 
-    fun getArticleDetailLiveData(id: Int): MutableLiveData<ArticleDetailResponse> {
-        val articleDetailLiveData = MutableLiveData<ArticleDetailResponse>()
+    fun getArticleDetailLiveData(id: Int): MutableLiveData<ArticleDetail> {
+        val articleDetailLiveData = MutableLiveData<ArticleDetail>()
         getService()
             .articleDetail(id)
             .enqueue(object : Callback<ArticleDetailResponse> {
@@ -39,11 +41,13 @@ class ArticleRepository {
                 ) {
                     val articleDetail = response.body()
                     if (articleDetail != null) {
-                        articleDetailLiveData.value = articleDetail
+                        articleDetailLiveData.value = ArticleDetail(articleDetail)
                     }
                 }
 
-                override fun onFailure(call: Call<ArticleDetailResponse>, t: Throwable) {}
+                override fun onFailure(call: Call<ArticleDetailResponse>, t: Throwable) {
+                    articleDetailLiveData.value = ArticleDetail(null, t.message)
+                }
             })
         return articleDetailLiveData
     }

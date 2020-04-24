@@ -2,6 +2,7 @@ package com.test.article
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -12,7 +13,7 @@ import com.test.article.DetailActivity.Companion.ID
 import com.test.article.DetailActivity.Companion.TITLE
 import com.test.article.adapter.ArticleAdapter
 import com.test.article.databinding.ActivityMainBinding
-import com.test.article.model.ArticleResponse
+import com.test.article.model.Article
 
 class MainActivity : AppCompatActivity(), ArticleAdapter.ItemClick {
 
@@ -39,8 +40,16 @@ class MainActivity : AppCompatActivity(), ArticleAdapter.ItemClick {
         articleViewModel = ViewModelProviders.of(this).get(ArticleViewModel::class.java)
         articleViewModel.articles.observe(
             this,
-            Observer { articleViewModels: List<ArticleResponse> ->
-                articleAdapter.setArticles(articleViewModels)
+            Observer { article: Article ->
+                if (article.articleResponse.isNotEmpty()) {
+                    articleAdapter.setArticles(article.articleResponse)
+                } else {
+                    AlertDialog.Builder(this)
+                        .setTitle("Error")
+                        .setMessage(article.error)
+                        .setNegativeButton("OK", null)
+                        .show()
+                }
             })
     }
 
