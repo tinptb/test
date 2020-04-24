@@ -1,4 +1,4 @@
-package com.test.article.model.repository
+package com.test.article.repository
 
 import androidx.lifecycle.MutableLiveData
 import com.test.article.model.Article
@@ -25,6 +25,9 @@ class ArticleRepository {
                     if (articles != null) {
                         articleLiveData.value =
                             Article(articles)
+                    } else {
+                        //Fix for 429 - Too Many Requests. Refer: https://beeceptor.com/pricing
+                        articleLiveData.value = Article(emptyList(), "Server Internal Error")
                     }
                 }
 
@@ -49,6 +52,9 @@ class ArticleRepository {
                     if (articleDetail != null) {
                         articleDetailLiveData.value =
                             ArticleDetail(articleDetail)
+                    } else {
+                        //Fix for 429 - Too Many Requests. Refer: https://beeceptor.com/pricing
+                        articleDetailLiveData.value = ArticleDetail(null, "Server Internal Error")
                     }
                 }
 
