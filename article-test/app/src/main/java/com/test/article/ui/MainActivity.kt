@@ -1,4 +1,4 @@
-package com.test.article
+package com.test.article.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,13 +9,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.test.article.DetailActivity.Companion.AVATAR
-import com.test.article.DetailActivity.Companion.ID
-import com.test.article.DetailActivity.Companion.TITLE
+import com.test.article.ArticleViewModel
+import com.test.article.R
+import com.test.article.ui.DetailActivity.Companion.AVATAR
+import com.test.article.ui.DetailActivity.Companion.ID
+import com.test.article.ui.DetailActivity.Companion.TITLE
 import com.test.article.adapter.ArticleAdapter
 import com.test.article.databinding.ActivityMainBinding
 import com.test.article.model.Article
-import com.test.article.model.ArticleResponseFactory
 
 class MainActivity : AppCompatActivity(), ArticleAdapter.ItemClick {
 
@@ -29,7 +30,9 @@ class MainActivity : AppCompatActivity(), ArticleAdapter.ItemClick {
 
     private fun setData() {
         val activityMainBinding: ActivityMainBinding =
-            DataBindingUtil.setContentView(this, R.layout.activity_main)
+            DataBindingUtil.setContentView(this,
+                R.layout.activity_main
+            )
 
         activityMainBinding.loadingVisible = View.VISIBLE
         val recyclerView = activityMainBinding.viewArticles

@@ -1,4 +1,4 @@
-package com.test.article
+package com.test.article.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.test.article.ArticleDetailViewModel
+import com.test.article.ArticleViewModelFactory
+import com.test.article.R
 import com.test.article.databinding.ActivityDetailBinding
 import com.test.article.model.ArticleDetail
 import kotlinx.android.synthetic.main.activity_detail.*
@@ -58,14 +61,19 @@ class DetailActivity : AppCompatActivity() {
 
     private fun setData() {
         val activityDetailBinding =
-            DataBindingUtil.setContentView<ActivityDetailBinding>(this, R.layout.activity_detail)
+            DataBindingUtil.setContentView<ActivityDetailBinding>(this,
+                R.layout.activity_detail
+            )
         activityDetailBinding.loadingVisible = View.VISIBLE
 
         articleDetailViewModel = ViewModelProviders.of(
             this,
             ArticleViewModelFactory(
                 this.application,
-                intent.getIntExtra(ID, 0)
+                intent.getIntExtra(
+                    ID,
+                    0
+                )
             )
         ).get(ArticleDetailViewModel::class.java)
 

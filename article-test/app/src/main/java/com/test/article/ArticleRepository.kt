@@ -1,6 +1,10 @@
-package com.test.article.model
+package com.test.article
 
 import androidx.lifecycle.MutableLiveData
+import com.test.article.model.Article
+import com.test.article.model.ArticleDetail
+import com.test.article.model.ArticleDetailResponse
+import com.test.article.model.ArticleResponse
 import com.test.article.network.RetrofitClient.Companion.getService
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,12 +23,14 @@ class ArticleRepository {
                 ) {
                     val articles = response.body()
                     if (articles != null) {
-                        articleLiveData.value = Article(articles)
+                        articleLiveData.value =
+                            Article(articles)
                     }
                 }
 
                 override fun onFailure(call: Call<List<ArticleResponse>>, t: Throwable) {
-                    articleLiveData.value = Article(emptyList(), t.message)
+                    articleLiveData.value =
+                        Article(emptyList(), t.message)
                 }
             })
         return articleLiveData
@@ -41,12 +47,14 @@ class ArticleRepository {
                 ) {
                     val articleDetail = response.body()
                     if (articleDetail != null) {
-                        articleDetailLiveData.value = ArticleDetail(articleDetail)
+                        articleDetailLiveData.value =
+                            ArticleDetail(articleDetail)
                     }
                 }
 
                 override fun onFailure(call: Call<ArticleDetailResponse>, t: Throwable) {
-                    articleDetailLiveData.value = ArticleDetail(null, t.message)
+                    articleDetailLiveData.value =
+                        ArticleDetail(null, t.message)
                 }
             })
         return articleDetailLiveData

@@ -10,7 +10,7 @@
 
         <variable
             name="editActivity"
-            type="com.test.article.EditActivity" />
+            type="com.test.article.ui.EditActivity" />
 
     </data>
 

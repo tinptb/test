@@ -19,9 +19,7 @@ data class ArticleResponse(
     fun convertLongToDate(time: Long): String {
         return ArticleResponseFactory.convertLongToDate(time)
     }
-
 }
-
 
 @BindingAdapter("avatar")
 fun loadImage(imageView: ImageView, imageURL: String) {
